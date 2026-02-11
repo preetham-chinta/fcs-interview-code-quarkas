@@ -1,0 +1,22 @@
+-- ============================================================================
+-- V1.0.1 - Seed Data (production)
+-- Same data as import.sql but applied via Flyway for prod deploys
+-- ============================================================================
+
+INSERT INTO store (id, name, quantityProductsInStock) VALUES (1, 'TONSTAD', 10);
+INSERT INTO store (id, name, quantityProductsInStock) VALUES (2, 'KALLAX', 5);
+INSERT INTO store (id, name, quantityProductsInStock) VALUES (3, 'BESTA', 3);
+ALTER SEQUENCE store_seq RESTART WITH 4;
+
+INSERT INTO product (id, name, stock) VALUES (1, 'TONSTAD', 10);
+INSERT INTO product (id, name, stock) VALUES (2, 'KALLAX', 5);
+INSERT INTO product (id, name, stock) VALUES (3, 'BESTA', 3);
+ALTER SEQUENCE product_seq RESTART WITH 4;
+
+INSERT INTO warehouse (id, businessUnitCode, location, capacity, stock, createdAt, archivedAt)
+VALUES (1, 'MWH.001', 'ZWOLLE-001', 100, 10, TIMESTAMP '2024-07-01 00:00:00', NULL);
+INSERT INTO warehouse (id, businessUnitCode, location, capacity, stock, createdAt, archivedAt)
+VALUES (2, 'MWH.012', 'AMSTERDAM-001', 50, 5, TIMESTAMP '2023-07-01 00:00:00', NULL);
+INSERT INTO warehouse (id, businessUnitCode, location, capacity, stock, createdAt, archivedAt)
+VALUES (3, 'MWH.023', 'TILBURG-001', 30, 27, TIMESTAMP '2021-02-01 00:00:00', NULL);
+ALTER SEQUENCE warehouse_seq RESTART WITH 4;
