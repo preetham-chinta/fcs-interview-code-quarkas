@@ -52,25 +52,11 @@ public class ReplaceWarehouseUseCase implements ReplaceWarehouseOperation {
     Location location = validator.requireValidLocation(newWarehouse.location);
 
     // Replace-specific validations (checked first — more specific error messages):
-    // 1. New capacity must accommodate the existing warehouse's stock
-    if (newWarehouse.capacity < existingWarehouse.stock) {
-      throw new ValidationException(
-          "New warehouse capacity ("
-              + newWarehouse.capacity
-              + ") cannot accommodate the existing warehouse's stock ("
-              + existingWarehouse.stock
-              + ").");
-    }
+    // 1. New capacity must accommodate the existing warehouse's stock (Capacity Accommodation)
+    validator.validateCapacityAccommodation(newWarehouse.capacity, existingWarehouse.stock);
 
-    // 2. New warehouse stock must match the existing warehouse's stock
-    if (!existingWarehouse.stock.equals(newWarehouse.stock)) {
-      throw new ValidationException(
-          "New warehouse stock ("
-              + newWarehouse.stock
-              + ") must match the existing warehouse's stock ("
-              + existingWarehouse.stock
-              + ").");
-    }
+    // 2. New warehouse stock must match the existing warehouse's stock (Stock Matching)
+    validator.validateStockMatching(newWarehouse.stock, existingWarehouse.stock);
 
     // General: capacity must not exceed location's maxCapacity
     validator.validateCapacityAndStock(
