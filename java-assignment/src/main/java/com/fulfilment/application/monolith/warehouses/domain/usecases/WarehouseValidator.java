@@ -121,46 +121,4 @@ public class WarehouseValidator {
           "Warehouse capacity (" + capacity + ") cannot handle the stock (" + stock + ").");
     }
   }
-
-  /**
-   * Validates warehouse replacement constraints (Capacity Accommodation).
-   *
-   * Ensures the new warehouse's capacity can accommodate the stock from the warehouse
-   * being replaced.
-   *
-   * @param newCapacity the capacity of the new warehouse
-   * @param existingStock the stock of the warehouse being replaced
-   * @throws ValidationException if the new capacity cannot accommodate the existing stock
-   */
-  public void validateCapacityAccommodation(int newCapacity, int existingStock) {
-    if (newCapacity < existingStock) {
-      throw new ValidationException(
-          "New warehouse capacity ("
-              + newCapacity
-              + ") cannot accommodate the existing warehouse's stock ("
-              + existingStock
-              + ").");
-    }
-  }
-
-  /**
-   * Validates warehouse replacement constraints (Stock Matching).
-   *
-   * Confirms that the stock of the new warehouse matches the stock of the previous
-   * warehouse.
-   *
-   * @param newStock the stock of the new warehouse
-   * @param existingStock the stock of the warehouse being replaced
-   * @throws ValidationException if the stocks do not match
-   */
-  public void validateStockMatching(int newStock, int existingStock) {
-    if (newStock != existingStock) {
-      throw new ValidationException(
-          "New warehouse stock ("
-              + newStock
-              + ") must match the existing warehouse's stock ("
-              + existingStock
-              + ").");
-    }
-  }
 }
